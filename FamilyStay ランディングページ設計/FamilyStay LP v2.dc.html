@@ -326,43 +326,7 @@ input::placeholder{color:#b0a89a}
       </div>
       <h2 style="margin:0 0 12px;font-family:'Zen Maru Gothic',sans-serif;font-size:clamp(22px,3.4vw,32px);font-weight:900;line-height:1.5">チャットで探しても、眺めて選んでも</h2>
       <p style="margin:0 0 28px;font-size:15px;color:#6d6455">地図で見る・保存した旅・予約も、ひとつの場所で。</p>
-      <div style="display:inline-flex;gap:6px;background:#f0e9d8;border-radius:999px;padding:5px;margin-bottom:28px">
-        <button type="button" onClick="{{setTab0}}" style="padding:9px 22px;border-radius:999px;border:none;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;background:{{t0.bg}};color:{{t0.c}};transition:background .25s,color .25s">発見</button>
-        <button type="button" onClick="{{setTab1}}" style="padding:9px 22px;border-radius:999px;border:none;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;background:{{t1.bg}};color:{{t1.c}};transition:background .25s,color .25s">ハルとチャット</button>
-      </div>
-      <!-- 発見タブ -->
-      <div style="display:{{d0}}">
-        <img src="assets/discover.png" alt="FamilyStay 発見画面" loading="lazy" style="width:100%;max-width:860px;display:block;margin:0 auto;border:2px solid #3a352c;border-radius:18px;box-shadow:8px 8px 0 rgba(58,53,44,.12)">
-      </div>
-      <!-- チャットタブ -->
-      <div style="display:{{d1}}">
-        <div style="max-width:860px;margin:0 auto;background:#ffffff;border:2px solid #3a352c;border-radius:18px;overflow:hidden;box-shadow:8px 8px 0 rgba(58,53,44,.12);text-align:left">
-          <div style="display:flex;align-items:center;gap:8px;background:#3a352c;padding:10px 14px">
-            <span style="width:10px;height:10px;border-radius:50%;background:#e0574f"></span><span style="width:10px;height:10px;border-radius:50%;background:#e8b93e"></span><span style="width:10px;height:10px;border-radius:50%;background:#5fb96a"></span>
-            <span style="flex:1;background:#54503f;border-radius:8px;color:#d6d0c0;font-size:11px;padding:4px 12px;margin-left:8px">familystay.jp/haru</span>
-          </div>
-          <div style="display:flex;min-height:340px">
-            <div style="width:230px;flex:none;border-right:1px solid #eeece5;padding:14px;flex-direction:column;gap:9px;display:{{sideD}}">
-              <div style="display:flex;align-items:center;gap:8px;padding-bottom:8px;border-bottom:1px solid #eeece5"><span style="width:26px;height:26px;border-radius:50%;background:#1e4d36;display:inline-flex;align-items:center;justify-content:center"><span style="width:10px;height:10px;background:#ffffff;border-radius:50% 0;display:inline-block"></span></span><div style="line-height:1.3"><div style="font-size:12px;font-weight:700;color:#2b2b28">ハル <span style="font-weight:400;color:#a8a8a0;font-size:9px">familystay</span></div><div style="font-size:9px;color:#3f7d5a">● オンライン・旅の相棒</div></div></div>
-              <div style="align-self:flex-end;background:#dcead9;border-radius:12px 12px 3px 12px;padding:7px 10px;font-size:10.5px;line-height:1.6;max-width:88%;color:#2b2b28">8月のお盆前後で、2歳の子と添い寝できる温泉宿ある？車で2時間くらいまで</div>
-              <div style="align-self:flex-start;background:#ffffff;border:1px solid #e5e3dc;border-radius:12px 12px 12px 3px;padding:7px 10px;font-size:10.5px;line-height:1.6;max-width:88%;color:#2b2b28">かしこまりました。お盆前後・車で2時間圏内・2歳のお子さまと添い寝OK、の温泉宿から探しますね。</div>
-              <div style="align-self:flex-start;background:#ffffff;border:1px solid #e5e3dc;border-radius:12px 12px 12px 3px;padding:7px 10px;font-size:10.5px;line-height:1.6;max-width:88%;color:#2b2b28">候補を並べました。<strong>貸切露天風呂つき</strong>の宿が2件あります。</div>
-            </div>
-            <div style="flex:1;padding:14px;min-width:0">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:8px">
-                <span style="font-size:12px;font-weight:700;color:#2b2b28">ハルの見つけた候補 <span style="font-weight:400;color:#a8a8a0;font-size:10px">お盆前後・車で2時間・2歳と添い寝OK</span></span>
-                <span style="border:1px solid #e5e3dc;border-radius:999px;padding:5px 12px;font-size:10.5px;color:#55554f;flex:none">地図で見る</span>
-              </div>
-              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px">
-                <div style="height:120px;border-radius:12px;background:repeating-linear-gradient(45deg,#e7ece3 0 10px,#f1f3ee 10px 20px);position:relative;overflow:hidden"><span style="position:absolute;left:8px;top:8px;background:#ffffff;color:#55554f;font-size:9px;padding:2px 8px;border-radius:999px">人気</span><span style="position:absolute;left:8px;bottom:8px;font-size:10.5px;font-weight:700;color:#55554f">山あいの宿 貸切露天風呂</span></div>
-                <div style="height:120px;border-radius:12px;background:repeating-linear-gradient(45deg,#e7ece3 0 10px,#f1f3ee 10px 20px);position:relative;overflow:hidden"><span style="position:absolute;left:8px;top:8px;background:#1e4d36;color:#ffffff;font-size:9px;padding:2px 8px;border-radius:999px">家族におすすめ</span><span style="position:absolute;left:8px;bottom:8px;font-size:10.5px;font-weight:700;color:#55554f">京町家の宿 ご家族で和食</span></div>
-                <div style="height:120px;border-radius:12px;background:repeating-linear-gradient(45deg,#e7ece3 0 10px,#f1f3ee 10px 20px);position:relative;overflow:hidden"><span style="position:absolute;left:8px;top:8px;background:#1e4d36;color:#ffffff;font-size:9px;padding:2px 8px;border-radius:999px">家族におすすめ</span><span style="position:absolute;left:8px;bottom:8px;font-size:10.5px;font-weight:700;color:#55554f">ホテル京都リゾート ファミリースイート</span></div>
-                <div style="height:120px;border-radius:12px;background:repeating-linear-gradient(45deg,#e7ece3 0 10px,#f1f3ee 10px 20px);position:relative;overflow:hidden"><span style="position:absolute;left:8px;top:8px;background:#ffffff;color:#55554f;font-size:9px;padding:2px 8px;border-radius:999px">人気</span><span style="position:absolute;left:8px;bottom:8px;font-size:10.5px;font-weight:700;color:#55554f">京都郊外 桜とグランピング</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <img src="assets/discover.png" alt="FamilyStay 発見画面" loading="lazy" style="width:100%;max-width:860px;display:block;margin:0 auto;border:2px solid #3a352c;border-radius:18px;box-shadow:8px 8px 0 rgba(58,53,44,.12)">
     </div>
   </section>
   <div style="height:64px;background:#fffdf6;border-radius:0 0 50% 50%/0 0 100% 100%"></div>
@@ -429,7 +393,7 @@ input::placeholder{color:#b0a89a}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;staticDemo&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;デモ演出&quot;},&quot;showAgeField&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;ウェイトリスト&quot;}}">
 class Component extends DCLogic {
-  state = { p: 0, tab: 0, faq: -1, heroDone: false, mainDone: false, agesSel: [], reduced: false };
+  state = { p: 0, faq: -1, heroDone: false, mainDone: false, agesSel: [], reduced: false };
   componentDidMount() {
     this._raf = null;
     this.onScroll = () => {
@@ -477,13 +441,6 @@ class Component extends DCLogic {
       mainFormD: this.state.mainDone ? 'none' : 'flex',
       mainDoneD: this.state.mainDone ? 'block' : 'none',
       ageD: (this.props.showAgeField ?? true) ? 'flex' : 'none',
-      setTab0: () => this.setState({ tab: 0 }),
-      setTab1: () => this.setState({ tab: 1 }),
-      t0: this.state.tab === 0 ? { bg: '#1e4d36', c: '#fffdf6' } : { bg: 'transparent', c: '#6d6455' },
-      t1: this.state.tab === 1 ? { bg: '#1e4d36', c: '#fffdf6' } : { bg: 'transparent', c: '#6d6455' },
-      d0: this.state.tab === 0 ? 'block' : 'none',
-      d1: this.state.tab === 1 ? 'block' : 'none',
-      sideD: 'flex',
       faqs: faqQs.map((q, i) => ({
         q,
         ic: this.state.faq === i ? '−' : '＋',
