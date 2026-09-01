@@ -1,0 +1,46 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build static site
+        run: |
+          SRC="FamilyStay ランディングページ設計"
+          mkdir -p _site
+          cp "$SRC/FamilyStay LP v2.dc.html" _site/index.html
+          cp "$SRC/FamilyStay LP.dc.html"    _site/v1.html
+          cp "$SRC/support.js" "$SRC/image-slot.js" _site/
+          cp -R "$SRC/assets" _site/assets
+          touch _site/.nojekyll
+          ls -R _site
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

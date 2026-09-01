@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&amp;family=Zen+Maru+Gothic:wght@500;700;900&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+html,body{margin:0;padding:0;background:#f7f2e6}
+body{font-family:'Zen Kaku Gothic New',sans-serif;color:#3a352c;-webkit-font-smoothing:antialiased}
+a{color:#1e4d36}a:hover{color:#163a29}
+:focus-visible{outline:2px solid #1e4d36;outline-offset:2px}
+@keyframes blink{0%,55%{opacity:1}56%,100%{opacity:0}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+input::placeholder{color:#b0a89a}
+</style>
+</helmet>
+<div style="background-color:#f7f2e6;background-image:radial-gradient(#e8ddc3 1.4px,transparent 1.4px);background-size:26px 26px;color:#3a352c;line-height:1.7;overflow-x:clip">
+
+  <!-- 1. ヒーロー -->
+  <section data-screen-label="ヒーロー" style="position:relative;max-width:1080px;margin:0 auto;padding:100px 24px 48px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:30px">
+    <div style="position:absolute;top:60px;left:50%;transform:translateX(-50%);width:min(680px,90vw);height:340px;background:#f3e3b8;border-radius:58% 42% 55% 45%/52% 60% 40% 48%;opacity:.55;z-index:0"></div>
+    <div style="position:absolute;top:340px;left:6%;width:64px;height:64px;background:#e9b39a;border-radius:56% 44% 50% 50%/48% 56% 44% 52%;opacity:.6;z-index:0;animation:floaty 7s ease-in-out infinite"></div>
+    <div style="position:absolute;top:140px;right:8%;width:44px;height:44px;background:#a9c9d6;border-radius:50% 50% 44% 56%/56% 44% 52% 48%;opacity:.6;z-index:0;animation:floaty 9s ease-in-out infinite"></div>
+    <div style="position:absolute;top:150px;left:8%;background:#fdf3d8;border:1.5px solid #c9a83e;color:#7a5d17;border-radius:999px;padding:5px 14px;font-size:12px;font-weight:700;transform:rotate(-6deg);z-index:0;animation:floaty 8s ease-in-out infinite">添い寝OK</div>
+    <div style="position:absolute;top:420px;right:5%;background:#fbe9df;border:1.5px solid #cf8a66;color:#8c4a2c;border-radius:999px;padding:5px 14px;font-size:12px;font-weight:700;transform:rotate(5deg);z-index:0;animation:floaty 10s ease-in-out infinite">貸切風呂</div>
+    <div style="position:absolute;top:480px;left:12%;background:#e7f0f4;border:1.5px solid #7fa8ba;color:#3d6577;border-radius:999px;padding:5px 14px;font-size:12px;font-weight:700;transform:rotate(4deg);z-index:0;animation:floaty 9s ease-in-out infinite">ベビーベッド</div>
+    <div style="position:relative;z-index:1;display:flex;align-items:center;gap:8px;font-weight:700;font-size:18px;letter-spacing:.02em">
+      <span style="width:26px;height:26px;border-radius:50%;background:#1e4d36;display:inline-flex;align-items:center;justify-content:center"><span style="width:11px;height:11px;background:#fffdf6;border-radius:50% 0;display:inline-block"></span></span>
+      <span>familystay</span>
+    </div>
+    <div style="position:relative;z-index:1;background:#fffdf6;border:1.5px solid #3a352c;border-radius:999px;padding:6px 18px;font-size:12.5px;font-weight:700;transform:rotate(-2deg);box-shadow:2px 2px 0 rgba(58,53,44,.2)">正式ローンチ前・ウェイトリスト受付中</div>
+    <h1 style="position:relative;z-index:1;margin:0;font-family:'Zen Maru Gothic',sans-serif;font-size:clamp(28px,5vw,50px);line-height:1.5;font-weight:900;letter-spacing:.02em;max-width:21em;text-wrap:pretty">2歳と添い寝できる温泉、<br>車で2時間以内。<br><span style="background:linear-gradient(transparent 62%,#f2d370 62% 92%,transparent 92%)">この一文で探せたら。</span></h1>
+    <p style="position:relative;z-index:1;margin:0;font-size:clamp(15px,2vw,18px);color:#6d6455">話しかけるだけで、ハルが家族に合う宿と体験を並べます</p>
+    <div style="position:relative;z-index:1;width:100%;max-width:460px">
+      <form id="hero-waitlist-form" onSubmit="{{onHeroSubmit}}" style="display:{{heroFormD}};gap:8px;flex-wrap:wrap;justify-content:center">
+        <input type="email" name="email" required="required" placeholder="メールアドレス" aria-label="メールアドレス" style="flex:1;min-width:220px;padding:14px 20px;border-radius:999px;border:2px solid #3a352c;font-size:15px;font-family:inherit;background:#fffdf6;color:#3a352c">
+        <button id="hero-waitlist-submit" type="submit" style="padding:14px 26px;border-radius:999px;border:2px solid #1e4d36;background:#1e4d36;color:#fffdf6;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;box-shadow:3px 3px 0 rgba(58,53,44,.25)" style-hover="background:#163a29;box-shadow:1px 1px 0 rgba(58,53,44,.25)">ウェイトリストに登録</button>
+      </form>
+      <p style="margin:0;padding:14px 0;font-size:15px;color:#1e4d36;font-weight:700;display:{{heroDoneD}}">登録しました。案内が届くまでお待ちください。</p>
+      <p style="margin:12px 0 0;font-size:12px;color:#a1988a">先行登録の方から順にご案内します</p>
+    </div>
+    <div style="position:relative;z-index:1;display:flex;gap:8px;align-items:center;margin-top:16px">
+      <span style="width:8px;height:8px;border-radius:50%;background:#e9b39a"></span>
+      <span style="width:8px;height:8px;border-radius:50%;background:#f2d370"></span>
+      <span style="width:8px;height:8px;border-radius:50%;background:#a9c9d6"></span>
+      <span style="font-size:12px;color:#a1988a;margin-left:4px">スクロールして、ハルとの会話を見る</span>
+    </div>
+  </section>
+
+  <!-- 2. スクロール連動デモ -->
+  <section data-screen-label="スクロールデモ" ref="{{demoRef}}" style="height:400vh;position:relative">
+    <div style="position:sticky;top:0;min-height:100vh;display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap;padding:24px;box-sizing:border-box">
+      <div style="position:absolute;top:12%;right:10%;width:220px;height:220px;background:#e8dbc2;border-radius:58% 42% 55% 45%/52% 60% 40% 48%;opacity:.5;z-index:0"></div>
+      <div style="position:absolute;bottom:14%;left:8%;width:70px;height:70px;border:4px solid #e9b39a;border-radius:50%;opacity:.5;z-index:0;animation:floaty 8s ease-in-out infinite"></div>
+      <div style="position:absolute;top:20%;left:14%;width:30px;height:30px;background:#f2d370;border-radius:8px;transform:rotate(15deg);opacity:.6;z-index:0"></div>
+      <div style="position:absolute;bottom:10%;right:6%;width:36px;height:36px;background:#a9c9d6;border-radius:56% 44% 50% 50%/48% 56% 44% 52%;opacity:.55;z-index:0;animation:floaty 10s ease-in-out infinite"></div>
+      <!-- スマホモック -->
+      <div style="position:relative;z-index:1;width:292px;background:#ffffff;border:2px solid #3a352c;border-radius:38px;padding:10px;box-shadow:8px 8px 0 rgba(58,53,44,.12);flex:none">
+        <div style="border-radius:28px;background:#ffffff;overflow:hidden;display:flex;flex-direction:column;height:560px">
+          <div style="display:flex;justify-content:space-between;padding:10px 20px 4px;font-size:11px;font-weight:700;color:#2b2b28"><span>9:41</span><span style="color:#8a8a84">●●●</span></div>
+          <div style="display:flex;align-items:center;gap:10px;padding:8px 14px;border-bottom:1px solid #eeece5">
+            <span style="color:#8a8a84;font-size:14px">‹</span>
+            <span style="width:34px;height:34px;border-radius:50%;background:#1e4d36;display:inline-flex;align-items:center;justify-content:center;flex:none"><span style="width:13px;height:13px;background:#ffffff;border-radius:50% 0;display:inline-block"></span></span>
+            <div style="flex:1;line-height:1.3">
+              <div style="font-size:13px;font-weight:700;color:#2b2b28">ハル <span style="font-weight:400;color:#a8a8a0;font-size:10px">familystay</span></div>
+              <div style="font-size:10px;color:#3f7d5a">● オンライン・旅の相棒</div>
+            </div>
+            <span style="color:#8a8a84;font-size:13px">⋯</span>
+          </div>
+          <div style="flex:1;padding:12px 12px 6px;display:flex;flex-direction:column;gap:9px;overflow:hidden;color:#2b2b28">
+            <div style="align-self:center;background:#f0efe9;color:#8a8a84;font-size:10px;padding:3px 12px;border-radius:999px">今日</div>
+            <div style="align-self:flex-end;max-width:82%;background:#dcead9;border-radius:16px 16px 4px 16px;padding:9px 12px;font-size:12.5px;line-height:1.6;min-height:3.2em;opacity:{{u.o}};transform:translateY({{u.y}}px);transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1)">{{typed}}<span style="opacity:{{caretO}};animation:blink 1s infinite;color:#1e4d36">▎</span></div>
+            <div style="align-self:flex-start;display:flex;gap:6px;max-width:88%;opacity:{{r1.o}};transform:translateY({{r1.y}}px);transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1)">
+              <span style="width:22px;height:22px;border-radius:50%;background:#1e4d36;flex:none;align-self:flex-end;display:inline-flex;align-items:center;justify-content:center"><span style="width:8px;height:8px;background:#ffffff;border-radius:50% 0;display:inline-block"></span></span>
+              <div style="background:#ffffff;border:1px solid #e5e3dc;border-radius:16px 16px 16px 4px;padding:9px 12px;font-size:12.5px;line-height:1.6">かしこまりました。お盆前後・車で2時間圏内・2歳のお子さまと添い寝OK、の温泉宿から探しますね。</div>
+            </div>
+            <div style="align-self:flex-start;display:flex;gap:6px;max-width:88%;opacity:{{r2.o}};transform:translateY({{r2.y}}px);transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1)">
+              <span style="width:22px;height:22px;border-radius:50%;background:#1e4d36;flex:none;align-self:flex-end;display:inline-flex;align-items:center;justify-content:center"><span style="width:8px;height:8px;background:#ffffff;border-radius:50% 0;display:inline-block"></span></span>
+              <div style="background:#ffffff;border:1px solid #e5e3dc;border-radius:16px 16px 16px 4px;padding:9px 12px;font-size:12.5px;line-height:1.6">ベビーベッドや貸切風呂のご希望はありますか？</div>
+            </div>
+            <div style="align-self:flex-end;display:flex;flex-direction:column;gap:6px;align-items:flex-end;opacity:{{ch.o}};transform:translateY({{ch.y}}px);transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1)">
+              <span style="border:1.5px solid #1e4d36;color:#1e4d36;background:#ffffff;border-radius:999px;padding:6px 14px;font-size:12px">貸切風呂あるとうれしい</span>
+              <span style="border:1.5px solid #1e4d36;color:#1e4d36;background:#ffffff;border-radius:999px;padding:6px 14px;font-size:12px">ベビーベッドも欲しい</span>
+              <span style="border:1.5px solid #1e4d36;color:#1e4d36;background:#ffffff;border-radius:999px;padding:6px 14px;font-size:12px">特にこだわりなし</span>
+            </div>
+            <div style="align-self:flex-start;display:flex;gap:6px;max-width:88%;opacity:{{r3.o}};transform:translateY({{r3.y}}px);transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1)">
+              <span style="width:22px;height:22px;border-radius:50%;background:#1e4d36;flex:none;align-self:flex-end;display:inline-flex;align-items:center;justify-content:center"><span style="width:8px;height:8px;background:#ffffff;border-radius:50% 0;display:inline-block"></span></span>
+              <div style="background:#ffffff;border:1px solid #e5e3dc;border-radius:16px 16px 16px 4px;padding:9px 12px;font-size:12.5px;line-height:1.6">候補を並べました。<strong>貸切露天風呂つき</strong>の宿が2件あります。気になる写真をタップしてください。</div>
+            </div>
+          </div>
+          <div style="padding:4px 12px 12px">
+            <div style="text-align:center;font-size:10px;color:#a8a8a0;padding-bottom:6px">マイクで気軽に話しかけてください</div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="width:30px;height:30px;border-radius:50%;border:1px solid #e5e3dc;display:inline-flex;align-items:center;justify-content:center;color:#8a8a84;flex:none">＋</span>
+              <span style="flex:1;background:#f0efe9;border-radius:999px;padding:8px 14px;font-size:12px;color:#a8a8a0">メッセージを入力…</span>
+              <span style="width:34px;height:34px;border-radius:50%;background:#1e4d36;display:inline-flex;align-items:center;justify-content:center;flex:none"><span style="width:7px;height:11px;border:1.5px solid #ffffff;border-radius:5px;display:inline-block"></span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 宿カード -->
+      <div style="position:relative;z-index:1;display:flex;flex-direction:column;gap:14px;width:316px;flex:none">
+        <div style="font-size:12px;color:#8a7f6c;letter-spacing:.05em;opacity:{{c1.o}};transition:opacity .5s"><span style="font-family:'Zen Maru Gothic',sans-serif;font-weight:700;color:#3a352c">ハルの見つけた候補</span> お盆前後・車で2時間・2歳と添い寝OK</div>
+        <div style="display:flex;gap:12px;background:#fffdf6;border:2px solid #3a352c;border-radius:18px;padding:10px;box-shadow:4px 4px 0 rgba(58,53,44,.15);transform:rotate(-1deg) translateY({{c1.y}}px);opacity:{{c1.o}};transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)">
+          <div style="width:86px;height:74px;flex:none"><image-slot id="demo-card-1" radius="12" src="assets/yado-rotenburo.png" placeholder="宿写真"></image-slot></div>
+          <div style="line-height:1.5">
+            <span style="background:#e9b39a;color:#3a352c;font-size:10px;font-weight:700;padding:2px 9px;border-radius:999px">人気</span>
+            <div style="font-size:14px;font-weight:700;margin-top:4px">山あいの宿 貸切露天風呂</div>
+            <div style="font-size:11px;color:#8a7f6c">鬼怒川・藤原町</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;background:#fffdf6;border:2px solid #3a352c;border-radius:18px;padding:10px;box-shadow:4px 4px 0 rgba(58,53,44,.15);transform:rotate(1.2deg) translateY({{c2.y}}px);opacity:{{c2.o}};transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)">
+          <div style="width:86px;height:74px;flex:none"><image-slot id="demo-card-2" radius="12" src="assets/yado-washoku.png" placeholder="宿写真"></image-slot></div>
+          <div style="line-height:1.5">
+            <span style="background:#f2d370;color:#3a352c;font-size:10px;font-weight:700;padding:2px 9px;border-radius:999px">家族におすすめ</span>
+            <div style="font-size:14px;font-weight:700;margin-top:4px">京町家の宿 ご家族で和食</div>
+            <div style="font-size:11px;color:#8a7f6c">京都・中京区</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;background:#fffdf6;border:2px solid #3a352c;border-radius:18px;padding:10px;box-shadow:4px 4px 0 rgba(58,53,44,.15);transform:rotate(-0.8deg) translateY({{c3.y}}px);opacity:{{c3.o}};transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)">
+          <div style="width:86px;height:74px;flex:none"><image-slot id="demo-card-3" radius="12" src="assets/yado-suite.png" placeholder="宿写真"></image-slot></div>
+          <div style="line-height:1.5">
+            <span style="background:#f2d370;color:#3a352c;font-size:10px;font-weight:700;padding:2px 9px;border-radius:999px">家族におすすめ</span>
+            <div style="font-size:14px;font-weight:700;margin-top:4px">ホテル京都リゾート ファミリースイート</div>
+            <div style="font-size:11px;color:#8a7f6c">京都・伏見区</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:#1e4d36;font-weight:700;font-family:'Zen Maru Gothic',sans-serif;opacity:{{r3.o}};transition:opacity .5s">気になる写真をタップしてください</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2.5 使い方3ステップ -->
+  <section data-screen-label="使い方" style="position:relative;max-width:1080px;margin:0 auto;padding:20px 24px 110px;text-align:center">
+    <div style="position:absolute;top:110px;left:3%;width:50px;height:50px;border:4px solid #f2d370;border-radius:50%;opacity:.6;animation:floaty 9s ease-in-out infinite"></div>
+    <div style="position:absolute;bottom:60px;right:4%;width:72px;height:72px;background:#e7f0f4;border-radius:58% 42% 55% 45%/52% 60% 40% 48%;opacity:.8;animation:floaty 7s ease-in-out infinite"></div>
+    <div style="display:flex;gap:8px;justify-content:center;margin-bottom:20px">
+      <span style="width:10px;height:10px;border-radius:50%;background:#e9b39a"></span>
+      <span style="width:10px;height:10px;border-radius:50%;background:#f2d370"></span>
+      <span style="width:10px;height:10px;border-radius:50%;background:#a9c9d6"></span>
+    </div>
+    <h2 style="margin:0 0 40px;font-family:'Zen Maru Gothic',sans-serif;font-size:clamp(22px,3.4vw,32px);font-weight:900;line-height:1.5">使い方は、これだけ。</h2>
+    <div style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center">
+      <div style="flex:1;min-width:240px;max-width:300px;background:#fdf3d8;border:2px solid #3a352c;border-radius:22px;padding:28px 24px;transform:rotate(-1deg);box-shadow:4px 4px 0 rgba(58,53,44,.15)">
+        <div style="width:44px;height:44px;border-radius:50%;background:#3a352c;color:#fdf3d8;font-family:'Zen Maru Gothic',sans-serif;font-weight:900;font-size:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px">1</div>
+        <div style="font-family:'Zen Maru Gothic',sans-serif;font-weight:900;font-size:18px;margin-bottom:8px">話しかける</div>
+        <p style="margin:0;font-size:13.5px;color:#6d6455;line-height:1.9">「温泉、2歳と添い寝、車で2時間」。思いついたまま、声でもOK。</p>
+      </div>
+      <div style="flex:1;min-width:240px;max-width:300px;background:#fbe9df;border:2px solid #3a352c;border-radius:22px;padding:28px 24px;transform:rotate(1deg);box-shadow:4px 4px 0 rgba(58,53,44,.15)">
+        <div style="width:44px;height:44px;border-radius:50%;background:#3a352c;color:#fbe9df;font-family:'Zen Maru Gothic',sans-serif;font-weight:900;font-size:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px">2</div>
+        <div style="font-family:'Zen Maru Gothic',sans-serif;font-weight:900;font-size:18px;margin-bottom:8px">ハルが並べる</div>
+        <p style="margin:0;font-size:13.5px;color:#6d6455;line-height:1.9">家族の条件に合う宿と体験だけが、カードで届きます。</p>
+      </div>
+      <div style="flex:1;min-width:240px;max-width:300px;background:#e7f0f4;border:2px solid #3a352c;border-radius:22px;padding:28px 24px;transform:rotate(-0.6deg);box-shadow:4px 4px 0 rgba(58,53,44,.15)">
+        <div style="width:44px;height:44px;border-radius:50%;background:#3a352c;color:#e7f0f4;font-family:'Zen Maru Gothic',sans-serif;font-weight:900;font-size:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px">3</div>
+        <div style="font-family:'Zen Maru Gothic',sans-serif;font-weight:900;font-size:18px;margin-bottom:8px">家族で選ぶ</div>
+        <p style="margin:0;font-size:13.5px;color:#6d6455;line-height:1.9">気になる写真をタップして、あとは眺めて選ぶだけ。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 対比 -->
+  <div style="height:64px;background:#fffdf6;border-radius:50% 50% 0 0/100% 100% 0 0"></div>
+  <section data-screen-label="対比" style="position:relative;background-color:#fffdf6;background-image:radial-gradient(#f0e9d5 1.4px,transparent 1.4px);background-size:26px 26px">
+    <div style="position:absolute;top:80px;left:3%;width:64px;height:64px;border:4px solid #a9c9d6;border-radius:50%;opacity:.5"></div>
+    <div style="position:absolute;bottom:120px;right:4%;width:90px;height:90px;background:#f3e3b8;border-radius:58% 42% 55% 45%/52% 60% 40% 48%;opacity:.6"></div>
+    <div style="position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:60px 24px 110px">
+      <div style="display:flex;gap:8px;justify-content:center;margin-bottom:20px">
+        <span style="width:10px;height:10px;border-radius:50%;background:#a9c9d6"></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:#e9b39a"></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:#f2d370"></span>
+      </div>
+      <h2 style="margin:0 0 14px;font-family:'Zen Maru Gothic',sans-serif;font-size:clamp(22px,3.4vw,34px);line-height:1.55;font-weight:900;text-align:center;text-wrap:pretty">"子どもOK"の宿は探せる。<br><span style="background:linear-gradient(transparent 62%,#f0c7b2 62% 92%,transparent 92%)">"2歳と添い寝OK"の宿は探せない。</span></h2>
+      <p style="margin:0 auto 48px;font-size:15px;color:#6d6455;text-align:center;max-width:34em">一般的な宿予約サイトでは、子連れの条件で絞り込めず、宿のページを1件ずつ開いて確かめることになります。</p>
+      <div style="display:flex;gap:28px;flex-wrap:wrap;justify-content:center;align-items:stretch">
+        <div style="flex:1;min-width:290px;max-width:440px;background:#f3efe4;border:2px dashed #c2b8a3;border-radius:24px;padding:28px">
+          <div style="font-size:12px;color:#8a7f6c;letter-spacing:.06em;margin-bottom:16px;font-weight:700">一般的な宿予約サイト</div>
+          <div style="display:flex;flex-direction:column;gap:10px;font-size:13px;color:#6d6455">
+            <div style="display:flex;align-items:center;gap:9px"><span style="width:14px;height:14px;border:1.5px solid #b3a892;border-radius:3px;flex:none"></span>禁煙ルーム</div>
+            <div style="display:flex;align-items:center;gap:9px"><span style="width:14px;height:14px;border:1.5px solid #b3a892;border-radius:3px;flex:none"></span>大浴場</div>
+            <div style="display:flex;align-items:center;gap:9px"><span style="width:14px;height:14px;border:1.5px solid #b3a892;border-radius:3px;flex:none"></span>駐車場あり</div>
+            <div style="display:flex;align-items:center;gap:9px"><span style="width:14px;height:14px;border:1.5px solid #b3a892;border-radius:3px;flex:none"></span>朝食付きプラン</div>
+            <div style="display:flex;align-items:center;gap:9px"><span style="width:14px;height:14px;border:1.5px solid #b3a892;border-radius:3px;flex:none;background:#d9d0bd"></span>子ども歓迎</div>
+            <div style="display:flex;align-items:center;gap:9px;border:1.5px dashed #c2b8a3;border-radius:10px;padding:8px 10px;color:#a1988a">「2歳と添い寝OK」…項目がありません</div>
+          </div>
+          <div style="margin-top:18px;display:flex;gap:4px;align-items:center">
+            <span style="width:54px;height:16px;background:#e0d7c3;border-radius:6px 6px 0 0"></span>
+            <span style="width:54px;height:16px;background:#e0d7c3;border-radius:6px 6px 0 0"></span>
+            <span style="width:54px;height:16px;background:#e0d7c3;border-radius:6px 6px 0 0"></span>
+            <span style="width:54px;height:16px;background:#e0d7c3;border-radius:6px 6px 0 0"></span>
+            <span style="font-size:11px;color:#a1988a;margin-left:6px">開いたタブ 12件…</span>
+          </div>
+        </div>
+        <div style="flex:1;min-width:290px;max-width:440px;background:#eef4ec;border:2px solid #1e4d36;border-radius:24px;padding:28px;display:flex;flex-direction:column;justify-content:center;gap:16px;box-shadow:5px 5px 0 rgba(30,77,54,.18)">
+          <div style="font-size:12px;color:#1e4d36;letter-spacing:.06em;font-weight:700">FamilyStay なら</div>
+          <div style="align-self:flex-end;background:#dcead9;border-radius:18px 18px 4px 18px;padding:12px 16px;font-size:14px;line-height:1.7;max-width:90%;color:#2b2b28">8月のお盆前後で、2歳の子と添い寝できる温泉宿ある？車で2時間くらいまで</div>
+          <div style="font-size:13px;color:#3a352c;display:flex;align-items:center;gap:8px"><span style="color:#1e4d36;font-weight:700">✓</span>この一文で、条件に合う宿だけが並びます</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 家族データ -->
+  <section data-screen-label="家族データ" style="position:relative;background-color:#fffdf6;background-image:radial-gradient(#f0e9d5 1.4px,transparent 1.4px);background-size:26px 26px">
+    <div style="position:absolute;top:60px;right:8%;width:34px;height:34px;background:#e9b39a;border-radius:8px;transform:rotate(20deg);opacity:.55"></div>
+    <div style="position:absolute;bottom:80px;left:6%;width:52px;height:52px;border:4px solid #f2d370;border-radius:50%;opacity:.6"></div>
+    <div style="position:relative;z-index:1;max-width:880px;margin:0 auto;padding:0 24px 110px;text-align:center">
+      <div style="display:flex;gap:8px;justify-content:center;margin-bottom:20px">
+        <span style="width:10px;height:10px;border-radius:50%;background:#e9b39a"></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:#f2d370"></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:#a9c9d6"></span>
+      </div>
+      <h2 style="margin:0 0 12px;font-family:'Zen Maru Gothic',sans-serif;font-size:clamp(22px,3.4vw,32px);font-weight:900;line-height:1.5">家族のことを、最初から知っている</h2>
+      <p style="margin:0 0 36px;font-size:15px;color:#6d6455">後から付け足したタグではなく、最初からこの軸で宿の情報を集めています。</p>
+      <!-- [要確認] 実装済みタグ一覧に合わせる -->
+      <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;max-width:580px;margin:0 auto">
+        <span style="background:#eef4ec;color:#1e4d36;border:1.5px solid #1e4d36;border-radius:999px;padding:9px 18px;font-size:14px;font-weight:700;transform:rotate(-1.5deg)">ベビーベッド</span>
+        <span style="background:#fdf3d8;color:#7a5d17;border:1.5px solid #c9a83e;border-radius:999px;padding:9px 18px;font-size:14px;font-weight:700;transform:rotate(1deg)">添い寝OK</span>
+        <span style="background:#fbe9df;color:#8c4a2c;border:1.5px solid #cf8a66;border-radius:999px;padding:9px 18px;font-size:14px;font-weight:700;transform:rotate(-0.5deg)">貸切風呂</span>
+        <span style="background:#e7f0f4;color:#3d6577;border:1.5px solid #7fa8ba;border-radius:999px;padding:9px 18px;font-size:14px;font-weight:700;transform:rotate(1.5deg)">離乳食対応</span>
+        <span style="background:#eef4ec;color:#1e4d36;border:1.5px solid #1e4d36;border-radius:999px;padding:9px 18px;font-size:14px;font-weight:700;transform:rotate(0.8deg)">アレルギー対応</span>
+        <span style="background:#fbe9df;color:#8c4a2c;border:1.5px solid #cf8a66;border-radius:999px;padding:9px 18px;font-size:14px;font-weight:700;transform:rotate(-1deg)">キャラクタールーム</span>
+        <span style="background:#e7f0f4;color:#3d6577;border:1.5px solid #7fa8ba;border-radius:999px;padding:9px 18px;font-size:14px;font-weight:700;transform:rotate(0.6deg)">おむつ替え台</span>
+        <span style="background:#fdf3d8;color:#7a5d17;border:1.5px solid #c9a83e;border-radius:999px;padding:9px 18px;font-size:14px;font-weight:700;transform:rotate(-1.2deg)">子ども用浴衣</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4.5 たとえばこんな旅 -->
+  <section data-screen-label="旅のイメージ" style="position:relative;background-color:#fffdf6;background-image:radial-gradient(#f0e9d5 1.4px,transparent 1.4px);background-size:26px 26px">
+    <div style="position:absolute;top:30px;left:4%;width:80px;height:80px;background:#e7f0f4;border-radius:58% 42% 55% 45%/52% 60% 40% 48%;opacity:.8"></div>
+    <div style="position:absolute;bottom:60px;right:5%;width:44px;height:44px;border:4px solid #e9b39a;border-radius:50%;opacity:.55"></div>
+    <div style="position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 24px 110px;text-align:center">
+      <h2 style="margin:0 0 10px;font-family:'Zen Maru Gothic',sans-serif;font-size:clamp(22px,3.4vw,32px);font-weight:900;line-height:1.5">たとえば、こんな旅。</h2>
+      <p style="margin:0 0 44px;font-size:15px;color:#6d6455">宿だけでなく、家族で楽しめる体験もいっしょに届きます。</p>
+      <div style="display:flex;gap:26px;flex-wrap:wrap;justify-content:center;align-items:flex-start">
+        <div style="position:relative;background:#ffffff;border:1px solid #e8e2d2;padding:10px 10px 12px;box-shadow:4px 5px 0 rgba(58,53,44,.12);transform:rotate(-3deg);width:168px">
+          <span style="position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(3deg);width:56px;height:16px;background:#f2d370;opacity:.8"></span>
+          <div style="height:118px"><image-slot id="photo-ichigo" shape="rect" src="assets/exp-ichigo.png" placeholder="いちご狩りの写真"></image-slot></div>
+          <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:12.5px;font-weight:700;margin-top:9px">いちご狩り</div>
+        </div>
+        <div style="position:relative;background:#ffffff;border:1px solid #e8e2d2;padding:10px 10px 12px;box-shadow:4px 5px 0 rgba(58,53,44,.12);transform:rotate(2deg);width:168px;margin-top:18px">
+          <span style="position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(-2deg);width:56px;height:16px;background:#e9b39a;opacity:.8"></span>
+          <div style="height:118px"><image-slot id="photo-rotenburo" shape="rect" src="assets/exp-rotenburo.png" placeholder="貸切露天風呂の写真"></image-slot></div>
+          <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:12.5px;font-weight:700;margin-top:9px">貸切露天風呂</div>
+        </div>
+        <div style="position:relative;background:#ffffff;border:1px solid #e8e2d2;padding:10px 10px 12px;box-shadow:4px 5px 0 rgba(58,53,44,.12);transform:rotate(-1.5deg);width:168px">
+          <span style="position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(2deg);width:56px;height:16px;background:#a9c9d6;opacity:.8"></span>
+          <div style="height:118px"><image-slot id="photo-kimono" shape="rect" src="assets/exp-kimono.png" placeholder="親子で着物の写真"></image-slot></div>
+          <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:12.5px;font-weight:700;margin-top:9px">親子で着物さんぽ</div>
+        </div>
+        <div style="position:relative;background:#ffffff;border:1px solid #e8e2d2;padding:10px 10px 12px;box-shadow:4px 5px 0 rgba(58,53,44,.12);transform:rotate(2.5deg);width:168px;margin-top:22px">
+          <span style="position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(-3deg);width:56px;height:16px;background:#f2d370;opacity:.8"></span>
+          <div style="height:118px"><image-slot id="photo-tougei" shape="rect" src="assets/exp-tougei.png" placeholder="家族で陶芸の写真"></image-slot></div>
+          <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:12.5px;font-weight:700;margin-top:9px">家族で陶芸体験</div>
+        </div>
+        <div style="position:relative;background:#ffffff;border:1px solid #e8e2d2;padding:10px 10px 12px;box-shadow:4px 5px 0 rgba(58,53,44,.12);transform:rotate(-2deg);width:168px;margin-top:6px">
+          <span style="position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(2deg);width:56px;height:16px;background:#e9b39a;opacity:.8"></span>
+          <div style="height:118px"><image-slot id="photo-doubutsu" shape="rect" src="assets/exp-doubutsu.png" placeholder="動物ふれあいの写真"></image-slot></div>
+          <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:12.5px;font-weight:700;margin-top:9px">動物ふれあい</div>
+        </div>
+        <div style="position:relative;background:#ffffff;border:1px solid #e8e2d2;padding:10px 10px 12px;box-shadow:4px 5px 0 rgba(58,53,44,.12);transform:rotate(1.5deg);width:168px;margin-top:26px">
+          <span style="position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(-2deg);width:56px;height:16px;background:#a9c9d6;opacity:.8"></span>
+          <div style="height:118px"><image-slot id="photo-chararoom" shape="rect" src="assets/exp-chararoom.png" placeholder="キャラクタールームの写真"></image-slot></div>
+          <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:12.5px;font-weight:700;margin-top:9px">キャラクタールーム</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 受動的発見 -->
+  <div style="height:64px;background:#fffdf6;border-radius:0 0 50% 50%/0 0 100% 100%"></div>
+  <section data-screen-label="受動的発見" style="position:relative;max-width:1080px;margin:0 auto;padding:80px 24px 110px;display:flex;gap:48px;flex-wrap:wrap;align-items:center;justify-content:center">
+    <div style="position:absolute;top:40px;left:4%;width:120px;height:120px;background:#f3e3b8;border-radius:58% 42% 55% 45%/52% 60% 40% 48%;opacity:.6;z-index:0"></div>
+    <div style="position:absolute;bottom:50px;right:3%;width:56px;height:56px;border:4px solid #f2d370;border-radius:50%;opacity:.55;z-index:0;animation:floaty 9s ease-in-out infinite"></div>
+    <div style="flex:1;min-width:280px;max-width:420px;position:relative;z-index:1">
+      <h2 style="margin:0 0 12px;font-family:'Zen Maru Gothic',sans-serif;font-size:clamp(22px,3.4vw,32px);font-weight:900;line-height:1.55"><span style="background:linear-gradient(transparent 62%,#f2d370 62% 92%,transparent 92%)">探す時間がなくても、旅は届く。</span></h2>
+      <p style="margin:0;font-size:15px;color:#6d6455;line-height:1.9">検索しなくても、ハルが家族の条件と季節に合わせて「そろそろこんな旅どう？」と先に提案します。開くのは、気が向いたときだけで大丈夫です。</p>
+    </div>
+    <div style="flex:none;width:300px;background:#eef4ec;border:2px solid #1e4d36;border-radius:22px;padding:16px;box-shadow:5px 5px 0 rgba(30,77,54,.18);transform:rotate(1deg);position:relative;z-index:1">
+      <div style="display:flex;align-items:flex-start;gap:10px">
+        <span style="width:32px;height:32px;border-radius:50%;background:#1e4d36;display:inline-flex;align-items:center;justify-content:center;flex:none"><span style="width:12px;height:12px;background:#ffffff;border-radius:50% 0;display:inline-block"></span></span>
+        <div style="line-height:1.4">
+          <div style="font-size:13px;font-weight:700;color:#2b2b28">ハル</div>
+          <div style="font-size:10px;color:#3f7d5a">オンライン・旅の相棒</div>
+        </div>
+      </div>
+      <p style="margin:12px 0;font-size:13px;line-height:1.8;color:#2b2b28">8月のお盆、2歳のお子さまと行ける温泉宿を3件見つけました。</p>
+      <button type="button" style="width:100%;padding:11px;border-radius:999px;border:none;background:#1e4d36;color:#ffffff;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer" style-hover="background:#163a29">ハルに相談する</button>
+    </div>
+  </section>
+
+  <!-- 6. 音声 -->
+  <section data-screen-label="音声" style="position:relative;max-width:760px;margin:0 auto;padding:0 24px 110px;display:flex;gap:36px;flex-wrap:wrap;align-items:center;justify-content:center">
+    <div style="position:absolute;top:0;right:0;width:40px;height:40px;background:#a9c9d6;border-radius:56% 44% 50% 50%/48% 56% 44% 52%;opacity:.5;animation:floaty 8s ease-in-out infinite"></div>
+    <div style="position:absolute;bottom:70px;left:-20px;width:28px;height:28px;background:#f2d370;border-radius:8px;transform:rotate(-14deg);opacity:.6"></div>
+    <div style="flex:none;width:230px;height:170px;border-radius:58% 42% 55% 45%/52% 60% 40% 48%;border:2px solid #3a352c;overflow:hidden"><image-slot id="photo-voice" shape="rect" src="assets/photo-voice.png" placeholder="子どもを抱っこしたまま話しかける親の写真をドロップ"></image-slot></div>
+    <div style="flex:1;min-width:260px;max-width:380px">
+      <h2 style="margin:0 0 10px;font-family:'Zen Maru Gothic',sans-serif;font-size:clamp(20px,3vw,26px);font-weight:900;line-height:1.5">手が空いていなくても</h2>
+      <p style="margin:0 0 16px;font-size:14px;color:#6d6455;line-height:1.9">抱っこ中でも、寝かしつけ後の暗い部屋でも。声だけで条件を伝えられます。</p>
+      <div style="display:flex;align-items:center;gap:8px;background:#ffffff;border:2px solid #3a352c;border-radius:999px;padding:6px 6px 6px 18px;max-width:320px;box-shadow:3px 3px 0 rgba(58,53,44,.15)">
+        <span style="flex:1;font-size:12.5px;color:#a1988a">マイクで気軽に話しかけてください</span>
+        <span style="width:36px;height:36px;border-radius:50%;background:#1e4d36;display:inline-flex;align-items:center;justify-content:center;flex:none"><span style="width:8px;height:12px;border:1.5px solid #ffffff;border-radius:5px;display:inline-block"></span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. 全体像 -->
+  <div style="height:64px;background:#fffdf6;border-radius:50% 50% 0 0/100% 100% 0 0"></div>
+  <section data-screen-label="全体像" style="position:relative;background-color:#fffdf6;background-image:radial-gradient(#f0e9d5 1.4px,transparent 1.4px);background-size:26px 26px">
+    <div style="position:absolute;top:70px;left:5%;width:60px;height:60px;background:#f3e3b8;border-radius:56% 44% 50% 50%/48% 56% 44% 52%;opacity:.7"></div>
+    <div style="position:absolute;bottom:140px;right:3%;width:70px;height:70px;border:4px solid #a9c9d6;border-radius:50%;opacity:.45"></div>
+    <div style="position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:40px 24px 110px;text-align:center">
+      <div style="display:flex;gap:8px;justify-content:center;margin-bottom:20px">
+        <span style="width:10px;height:10px;border-radius:50%;background:#f2d370"></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:#a9c9d6"></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:#e9b39a"></span>
+      </div>
+      <h2 style="margin:0 0 12px;font-family:'Zen Maru Gothic',sans-serif;font-size:clamp(22px,3.4vw,32px);font-weight:900;line-height:1.5">チャットで探しても、眺めて選んでも</h2>
+      <p style="margin:0 0 28px;font-size:15px;color:#6d6455">地図で見る・保存した旅・予約も、ひとつの場所で。</p>
+      <div style="display:inline-flex;gap:6px;background:#f0e9d8;border-radius:999px;padding:5px;margin-bottom:28px">
+        <button type="button" onClick="{{setTab0}}" style="padding:9px 22px;border-radius:999px;border:none;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;background:{{t0.bg}};color:{{t0.c}};transition:background .25s,color .25s">発見</button>
+        <button type="button" onClick="{{setTab1}}" style="padding:9px 22px;border-radius:999px;border:none;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;background:{{t1.bg}};color:{{t1.c}};transition:background .25s,color .25s">ハルとチャット</button>
+      </div>
+      <!-- 発見タブ -->
+      <div style="display:{{d0}}">
+        <img src="assets/discover.png" alt="FamilyStay 発見画面" loading="lazy" style="width:100%;max-width:860px;display:block;margin:0 auto;border:2px solid #3a352c;border-radius:18px;box-shadow:8px 8px 0 rgba(58,53,44,.12)">
+      </div>
+      <!-- チャットタブ -->
+      <div style="display:{{d1}}">
+        <div style="max-width:860px;margin:0 auto;background:#ffffff;border:2px solid #3a352c;border-radius:18px;overflow:hidden;box-shadow:8px 8px 0 rgba(58,53,44,.12);text-align:left">
+          <div style="display:flex;align-items:center;gap:8px;background:#3a352c;padding:10px 14px">
+            <span style="width:10px;height:10px;border-radius:50%;background:#e0574f"></span><span style="width:10px;height:10px;border-radius:50%;background:#e8b93e"></span><span style="width:10px;height:10px;border-radius:50%;background:#5fb96a"></span>
+            <span style="flex:1;background:#54503f;border-radius:8px;color:#d6d0c0;font-size:11px;padding:4px 12px;margin-left:8px">familystay.jp/haru</span>
+          </div>
+          <div style="display:flex;min-height:340px">
+            <div style="width:230px;flex:none;border-right:1px solid #eeece5;padding:14px;flex-direction:column;gap:9px;display:{{sideD}}">
+              <div style="display:flex;align-items:center;gap:8px;padding-bottom:8px;border-bottom:1px solid #eeece5"><span style="width:26px;height:26px;border-radius:50%;background:#1e4d36;display:inline-flex;align-items:center;justify-content:center"><span style="width:10px;height:10px;background:#ffffff;border-radius:50% 0;display:inline-block"></span></span><div style="line-height:1.3"><div style="font-size:12px;font-weight:700;color:#2b2b28">ハル <span style="font-weight:400;color:#a8a8a0;font-size:9px">familystay</span></div><div style="font-size:9px;color:#3f7d5a">● オンライン・旅の相棒</div></div></div>
+              <div style="align-self:flex-end;background:#dcead9;border-radius:12px 12px 3px 12px;padding:7px 10px;font-size:10.5px;line-height:1.6;max-width:88%;color:#2b2b28">8月のお盆前後で、2歳の子と添い寝できる温泉宿ある？車で2時間くらいまで</div>
+              <div style="align-self:flex-start;background:#ffffff;border:1px solid #e5e3dc;border-radius:12px 12px 12px 3px;padding:7px 10px;font-size:10.5px;line-height:1.6;max-width:88%;color:#2b2b28">かしこまりました。お盆前後・車で2時間圏内・2歳のお子さまと添い寝OK、の温泉宿から探しますね。</div>
+              <div style="align-self:flex-start;background:#ffffff;border:1px solid #e5e3dc;border-radius:12px 12px 12px 3px;padding:7px 10px;font-size:10.5px;line-height:1.6;max-width:88%;color:#2b2b28">候補を並べました。<strong>貸切露天風呂つき</strong>の宿が2件あります。</div>
+            </div>
+            <div style="flex:1;padding:14px;min-width:0">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:8px">
+                <span style="font-size:12px;font-weight:700;color:#2b2b28">ハルの見つけた候補 <span style="font-weight:400;color:#a8a8a0;font-size:10px">お盆前後・車で2時間・2歳と添い寝OK</span></span>
+                <span style="border:1px solid #e5e3dc;border-radius:999px;padding:5px 12px;font-size:10.5px;color:#55554f;flex:none">地図で見る</span>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px">
+                <div style="height:120px;border-radius:12px;background:repeating-linear-gradient(45deg,#e7ece3 0 10px,#f1f3ee 10px 20px);position:relative;overflow:hidden"><span style="position:absolute;left:8px;top:8px;background:#ffffff;color:#55554f;font-size:9px;padding:2px 8px;border-radius:999px">人気</span><span style="position:absolute;left:8px;bottom:8px;font-size:10.5px;font-weight:700;color:#55554f">山あいの宿 貸切露天風呂</span></div>
+                <div style="height:120px;border-radius:12px;background:repeating-linear-gradient(45deg,#e7ece3 0 10px,#f1f3ee 10px 20px);position:relative;overflow:hidden"><span style="position:absolute;left:8px;top:8px;background:#1e4d36;color:#ffffff;font-size:9px;padding:2px 8px;border-radius:999px">家族におすすめ</span><span style="position:absolute;left:8px;bottom:8px;font-size:10.5px;font-weight:700;color:#55554f">京町家の宿 ご家族で和食</span></div>
+                <div style="height:120px;border-radius:12px;background:repeating-linear-gradient(45deg,#e7ece3 0 10px,#f1f3ee 10px 20px);position:relative;overflow:hidden"><span style="position:absolute;left:8px;top:8px;background:#1e4d36;color:#ffffff;font-size:9px;padding:2px 8px;border-radius:999px">家族におすすめ</span><span style="position:absolute;left:8px;bottom:8px;font-size:10.5px;font-weight:700;color:#55554f">ホテル京都リゾート ファミリースイート</span></div>
+                <div style="height:120px;border-radius:12px;background:repeating-linear-gradient(45deg,#e7ece3 0 10px,#f1f3ee 10px 20px);position:relative;overflow:hidden"><span style="position:absolute;left:8px;top:8px;background:#ffffff;color:#55554f;font-size:9px;padding:2px 8px;border-radius:999px">人気</span><span style="position:absolute;left:8px;bottom:8px;font-size:10.5px;font-weight:700;color:#55554f">京都郊外 桜とグランピング</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div style="height:64px;background:#fffdf6;border-radius:0 0 50% 50%/0 0 100% 100%"></div>
+
+  <!-- 8. ウェイトリスト -->
+  <section data-screen-label="ウェイトリスト" style="position:relative;max-width:640px;margin:0 auto;padding:90px 24px;text-align:center">
+    <div style="position:absolute;top:30px;right:0;width:70px;height:70px;background:#a9c9d6;border-radius:56% 44% 50% 50%/48% 56% 44% 52%;opacity:.55;animation:floaty 8s ease-in-out infinite"></div>
+    <div style="position:absolute;bottom:40px;left:0;width:50px;height:50px;background:#e9b39a;border-radius:50% 50% 44% 56%/56% 44% 52% 48%;opacity:.55;animation:floaty 6s ease-in-out infinite"></div>
+    <h2 style="margin:0 0 12px;font-family:'Zen Maru Gothic',sans-serif;font-size:clamp(24px,3.6vw,36px);font-weight:900;line-height:1.5"><span style="background:linear-gradient(transparent 62%,#f2d370 62% 92%,transparent 92%)">つぎの家族旅行は、ハルと。</span></h2>
+    <p style="margin:0 0 36px;font-size:15px;color:#6d6455">先行登録の方から順にご案内します。</p>
+    <!-- [要確認] 招待制の方針・先行体験枠は確定後にコピー追加 -->
+    <form id="waitlist-form" onSubmit="{{onMainSubmit}}" style="display:{{mainFormD}};flex-direction:column;gap:18px;align-items:center">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;width:100%">
+        <input type="email" name="email" required="required" placeholder="メールアドレス" aria-label="メールアドレス" style="flex:1;min-width:220px;max-width:340px;padding:14px 20px;border-radius:999px;border:2px solid #3a352c;font-size:15px;font-family:inherit;background:#fffdf6;color:#3a352c">
+        <button id="waitlist-submit" type="submit" style="padding:14px 28px;border-radius:999px;border:2px solid #1e4d36;background:#1e4d36;color:#fffdf6;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;box-shadow:3px 3px 0 rgba(58,53,44,.25)" style-hover="background:#163a29;box-shadow:1px 1px 0 rgba(58,53,44,.25)">ウェイトリストに登録</button>
+      </div>
+      <div style="display:{{ageD}};flex-direction:column;gap:10px;align-items:center">
+        <span style="font-size:12.5px;color:#8a7f6c">お子さまの年齢（任意）</span>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+          <sc-for list="{{ages}}" as="ag" hint-placeholder-count="4">
+            <button type="button" name="child_age" onClick="{{ag.onT}}" style="padding:8px 16px;border-radius:999px;border:1.5px solid {{ag.bd}};background:{{ag.bg}};color:{{ag.c}};font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;transition:background .2s,color .2s">{{ag.label}}</button>
+          </sc-for>
+        </div>
+      </div>
+    </form>
+    <p style="margin:0;padding:16px 0;font-size:16px;color:#1e4d36;font-weight:700;display:{{mainDoneD}}">登録しました。案内が届くまでお待ちください。</p>
+  </section>
+
+  <!-- 9. FAQ -->
+  <section data-screen-label="FAQ" style="position:relative;max-width:640px;margin:0 auto;padding:0 24px 110px">
+    <div style="position:absolute;top:0;left:-90px;width:64px;height:64px;background:#f3e3b8;border-radius:58% 42% 55% 45%/52% 60% 40% 48%;opacity:.7;animation:floaty 9s ease-in-out infinite"></div>
+    <div style="position:absolute;bottom:80px;right:-80px;width:48px;height:48px;border:4px solid #e9b39a;border-radius:50%;opacity:.5;animation:floaty 7s ease-in-out infinite"></div>
+    <h2 style="margin:0 0 24px;font-family:'Zen Maru Gothic',sans-serif;font-size:clamp(20px,3vw,26px);font-weight:900;text-align:center">よくある質問</h2>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <sc-for list="{{faqs}}" as="f" hint-placeholder-count="5">
+        <div style="background:#fffdf6;border:1.5px solid #d9d0bd;border-radius:16px">
+          <button type="button" onClick="{{f.onT}}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;background:none;border:none;padding:16px 18px;font-size:15px;font-weight:700;font-family:inherit;color:#3a352c;cursor:pointer;text-align:left">{{f.q}}<span style="color:#1e4d36;font-size:16px;flex:none">{{f.ic}}</span></button>
+          <p style="margin:0;padding:0 18px 16px;font-size:14px;color:#8a7f6c;display:{{f.ad}}">[要確認]</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- 10. フッター -->
+  <div style="height:64px;background:#1e4d36;border-radius:50% 50% 0 0/100% 100% 0 0"></div>
+  <footer data-screen-label="フッター" style="position:relative;overflow:hidden;background:#1e4d36;color:#dcead9">
+    <div style="position:absolute;top:-40px;right:5%;width:150px;height:150px;background:#2a6044;border-radius:58% 42% 55% 45%/52% 60% 40% 48%;opacity:.8"></div>
+    <div style="position:absolute;bottom:-30px;left:8%;width:110px;height:110px;background:#2a6044;border-radius:56% 44% 50% 50%/48% 56% 44% 52%;opacity:.8"></div>
+    <div style="position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:24px 24px 44px;display:flex;flex-direction:column;gap:24px">
+      <div style="display:flex;align-items:center;gap:8px;font-weight:700;font-size:16px;color:#ffffff">
+        <span style="width:24px;height:24px;border-radius:50%;background:#fffdf6;display:inline-flex;align-items:center;justify-content:center"><span style="width:10px;height:10px;background:#1e4d36;border-radius:50% 0;display:inline-block"></span></span>
+        familystay
+      </div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:13px">
+        <a href="#" style="color:#dcead9">プライバシーポリシー</a>
+        <a href="#" style="color:#dcead9">利用規約</a>
+        <a href="#" style="color:#dcead9">お問い合わせ</a>
+      </div>
+      <div style="font-size:12px;color:#9dbfa9;line-height:1.9">株式会社Family Stay／東京都 [要確認：番地]／旅行業登録番号 [要確認：取得後に記載]</div>
+      <div style="font-size:11px;color:#9dbfa9">ハルはAIです。宿の設備は予約前に施設の情報をご確認ください。</div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;staticDemo&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;デモ演出&quot;},&quot;showAgeField&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;ウェイトリスト&quot;}}">
+class Component extends DCLogic {
+  state = { p: 0, tab: 0, faq: -1, heroDone: false, mainDone: false, agesSel: [], reduced: false };
+  componentDidMount() {
+    this._raf = null;
+    this.onScroll = () => {
+      if (this._raf) return;
+      this._raf = requestAnimationFrame(() => {
+        this._raf = null;
+        const el = this.demoEl;
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        const total = r.height - window.innerHeight;
+        if (total <= 0) return;
+        const p = Math.min(1, Math.max(0, -r.top / total));
+        if (Math.abs(p - this.state.p) > 0.003) this.setState({ p });
+      });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onScroll, { passive: true });
+    try { if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) this.setState({ reduced: true }); } catch (e) {}
+    this.onScroll();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onScroll);
+  }
+  renderVals() {
+    const staticDemo = (this.props.staticDemo ?? false) || this.state.reduced;
+    const p = staticDemo ? 1 : this.state.p;
+    const MSG = '8月のお盆前後で、2歳の子と添い寝できる温泉宿ある？車で2時間くらいまで';
+    let typedLen = 0;
+    if (p > 0.03) typedLen = Math.min(MSG.length, Math.round(((p - 0.03) / 0.20) * MSG.length));
+    const v = (b) => ({ o: b ? 1 : 0, y: b ? 0 : 14 });
+    const faqQs = ['いつ使えますか？', '料金はかかりますか？', 'どのエリアの宿がありますか？', '子どもの情報はどう扱われますか？', '予約はFamilyStay上で完結しますか？'];
+    const ageLabels = ['0〜1歳', '2〜3歳', '4〜6歳', 'これから'];
+    return {
+      demoRef: (el) => { this.demoEl = el; },
+      typed: MSG.slice(0, typedLen),
+      caretO: typedLen > 0 && typedLen < MSG.length ? 1 : 0,
+      u: v(typedLen > 0),
+      r1: v(p > 0.30), r2: v(p > 0.44), ch: v(p > 0.48),
+      c1: v(p > 0.58), c2: v(p > 0.70), c3: v(p > 0.82), r3: v(p > 0.92),
+      onHeroSubmit: (e) => { e.preventDefault(); this.setState({ heroDone: true }); },
+      onMainSubmit: (e) => { e.preventDefault(); this.setState({ mainDone: true }); },
+      heroFormD: this.state.heroDone ? 'none' : 'flex',
+      heroDoneD: this.state.heroDone ? 'block' : 'none',
+      mainFormD: this.state.mainDone ? 'none' : 'flex',
+      mainDoneD: this.state.mainDone ? 'block' : 'none',
+      ageD: (this.props.showAgeField ?? true) ? 'flex' : 'none',
+      setTab0: () => this.setState({ tab: 0 }),
+      setTab1: () => this.setState({ tab: 1 }),
+      t0: this.state.tab === 0 ? { bg: '#1e4d36', c: '#fffdf6' } : { bg: 'transparent', c: '#6d6455' },
+      t1: this.state.tab === 1 ? { bg: '#1e4d36', c: '#fffdf6' } : { bg: 'transparent', c: '#6d6455' },
+      d0: this.state.tab === 0 ? 'block' : 'none',
+      d1: this.state.tab === 1 ? 'block' : 'none',
+      sideD: 'flex',
+      faqs: faqQs.map((q, i) => ({
+        q,
+        ic: this.state.faq === i ? '−' : '＋',
+        ad: this.state.faq === i ? 'block' : 'none',
+        onT: () => this.setState((s) => ({ faq: s.faq === i ? -1 : i }))
+      })),
+      ages: ageLabels.map((label) => {
+        const on = this.state.agesSel.includes(label);
+        return {
+          label,
+          bg: on ? '#1e4d36' : '#fffdf6',
+          c: on ? '#fffdf6' : '#3a352c',
+          bd: on ? '#1e4d36' : '#b3a892',
+          onT: () => this.setState((s) => ({ agesSel: on ? s.agesSel.filter((a) => a !== label) : [...s.agesSel, label] }))
+        };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>
